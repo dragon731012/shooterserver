@@ -12,7 +12,7 @@ const io = socketIo(server, {
         origin: 'https://code.addmask.com',  // Allow this specific domain
         methods: ['GET', 'POST'],
         allowedHeaders: ['Content-Type'],
-        credentials: true  // Optional, depending on your needs
+        credentials: true
     }
 });
 
@@ -26,27 +26,33 @@ app.use(cors({
 // Store player data (if needed)
 let players = {}; 
 
-// Handle socket connections
 io.on('connection', (socket) => {
   console.log('Player connected:', socket.id);
+  socket.emit('your_id', { id: socket.id });
 
+  // Initialize player entry
   players[socket.id] = {
-    position: { x: 0, y: 0, z: 0 },  // Default position (you can set any initial value)
-    rotation: { x: 0, y: 0, z: 0 }   // Default rotation (if needed)
+    position: { x: 0, y: 0, z: 0 },
+    rotation: { x: 0, y: 0, z: 0 }
   };
   
-  // When a player sends movement data, broadcast it to others
   socket.on('player-movement', (data) => {
     players[socket.id]["position"] = data.position;
-    players[socket.id]["rotation"] = data.rotation; // Optionally store it
-    console.log("player moved: "+data);
+    players[socket.id]["rotation"] = data.rotation;
     // Broadcast to everyone except the sender
-    socket.broadcast.emit('playerMoved', { id: socket.id, movementData: data.position, rotationData: data.rotation });
+    socket.broadcast.emit('playerMoved', { 
+        id: socket.id, 
+        movementData: data.position, 
+        rotationData: data.rotation 
+    });
   });
   
-  // When a player shoots, broadcast that event
   socket.on('shoot', (data) => {
-    socket.broadcast.emit('playerShot', { id: socket.id, position: data.position, direction: data.direction });
+    socket.broadcast.emit('playerShot', { 
+        id: socket.id, 
+        position: data.position, 
+        direction: data.direction 
+    });
   });
   
   socket.on('disconnect', () => {
