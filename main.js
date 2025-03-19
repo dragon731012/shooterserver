@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 // Store player data (if needed)
-let players = {};
+let players = {}; 
 
 // Handle socket connections
 io.on('connection', (socket) => {
