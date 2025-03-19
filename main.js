@@ -29,6 +29,11 @@ let players = {};
 // Handle socket connections
 io.on('connection', (socket) => {
   console.log('Player connected:', socket.id);
+
+  players[socket.id] = {
+    position: { x: 0, y: 0, z: 0 },  // Default position (you can set any initial value)
+    rotation: { x: 0, y: 0, z: 0 }   // Default rotation (if needed)
+  };
   
   // When a player sends movement data, broadcast it to others
   socket.on('player-movement', (data) => {
