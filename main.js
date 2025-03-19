@@ -14,7 +14,7 @@ app.use(cors({
   origin: 'https://code.addmask.com', // Replace with your actual client domain
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
-}));
+})); 
 
 // Store player data (if needed)
 let players = {}; 
