@@ -32,10 +32,11 @@ io.on('connection', (socket) => {
   
   // When a player sends movement data, broadcast it to others
   socket.on('player-movement', (data) => {
-    players[socket.id] = data.position; // Optionally store it
+    players[socket.id]["position"] = data.position;
+    players[socket.id]["rotation"] = data.rotation; // Optionally store it
     console.log("player moved: "+data);
     // Broadcast to everyone except the sender
-    socket.broadcast.emit('playerMoved', { id: socket.id, movementData: data.position });
+    socket.broadcast.emit('playerMoved', { id: socket.id, movementData: data.position, rotationData: data.rotation });
   });
   
   // When a player shoots, broadcast that event
