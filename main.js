@@ -48,6 +48,13 @@ io.on('connection', (socket) => {
         direction: data.direction
     });
   });
+
+  socket.on('sendDamageEvent', (data) => {
+    io.to(id).emit('recieveDamageEvent', { 
+      playersent: playersent,
+      damage: damage
+    });
+  });
   
   socket.on('shoot', (data) => {
     socket.broadcast.emit('playerShot', { 
