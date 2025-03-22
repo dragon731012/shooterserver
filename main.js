@@ -37,11 +37,15 @@ io.on('connection', (socket) => {
   socket.on('player-movement', (data) => {
     players[socket.id]["position"] = data.position;
     players[socket.id]["rotation"] = data.rotation;
+    players[socket.id]["direction"] = data.direction;
+
+    console.log(data.direction);
     // Broadcast to everyone except the sender
     socket.broadcast.emit('playerMoved', { 
         id: socket.id, 
         movementData: data.position, 
-        rotationData: data.rotation 
+        rotationData: data.rotation,
+        direction: data.direction
     });
   });
   
