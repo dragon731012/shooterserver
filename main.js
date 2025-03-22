@@ -50,11 +50,10 @@ io.on('connection', (socket) => {
   });
 
   socket.on('sendDamageEvent', (data) => {
-    io.to(id).emit('recieveDamageEvent', { 
-      playersent: playersent,
-      damage: damage
+    io.to(data.id).emit('recieveDamageEvent', { 
+      playersent: data.playersent,
+      damage: data.damage
     });
-    console.log("damage event recieved from "+id+" to "+playersent);
   });
   
   socket.on('shoot', (data) => {
