@@ -26,7 +26,7 @@ let players = {};
 
 io.on('connection', (socket) => {
   console.log('Player connected:', socket.id);
-  socket.emit('your_id', { id: socket.id });
+  io.to(socket.id).emit('your_id', { id: socket.id });
 
   // Initialize player entry
   players[socket.id] = {
