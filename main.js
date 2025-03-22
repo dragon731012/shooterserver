@@ -54,6 +54,7 @@ io.on('connection', (socket) => {
       playersent: playersent,
       damage: damage
     });
+    console.log("damage event recieved from "+id+" to "+playersent);
   });
   
   socket.on('shoot', (data) => {
