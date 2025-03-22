@@ -53,8 +53,7 @@ io.on('connection', (socket) => {
     socket.broadcast.emit('playerShot', { 
         id: socket.id, 
         position: data.position, 
-        direction: data.direction,
-        moving: data.moving
+        direction: data.direction
     });
   });
   
