@@ -31,7 +31,8 @@ io.on('connection', (socket) => {
   // Initialize player entry
   players[socket.id] = {
     position: { x: 0, y: 0, z: 0 },
-    rotation: { x: 0, y: 0, z: 0 }
+    rotation: { x: 0, y: 0, z: 0 },
+    direction: "idle"
   };
   
   socket.on('player-movement', (data) => {
