@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
         id: socket.id, 
         position: data.position, 
         direction: data.direction,
-        gun:gun
+        gun:data.gun
     });
   });
   
